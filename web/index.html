@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1DB6C2">
+<title>扫码签到</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <span>扫码签到</span>
+  <small>目标：{{TARGET}}</small>
+</header>
+
+<div id="wrap"><video id="v" playsinline muted autoplay></video></div>
+
+<div class="row">
+  <button id="go">开始扫描</button>
+  <button id="torch" class="ghost" disabled>手电筒</button>
+  <button id="cam" class="ghost">用系统相机拍一张</button>
+</div>
+
+<div id="hint">对准屏幕上的二维码；解不动就点「用系统相机拍一张」，拍清的图成功率最高</div>
+
+<label class="pick" id="drop">也可以把图片拖到这里 / 点这里选图
+  <input id="file" type="file" accept="image/*">
+</label>
+<input id="filecam" type="file" accept="image/*" capture="environment">
+
+<div class="row">
+  <input id="manual" placeholder="扫码识别出的链接也能贴这里">
+  <button id="send">提交这段文本</button>
+</div>
+
+<div id="log"></div>
+
+<script src="vendor/jsQR.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

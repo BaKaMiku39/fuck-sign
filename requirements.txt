@@ -1,0 +1,6 @@
+# ---- 运行依赖 ----
+requests>=2.31
+
+# ---- 服务端解码（POST /decode 用；不装则只能靠浏览器 jsQR）----
+pillow>=10.0
+zxing-cpp>=2.2

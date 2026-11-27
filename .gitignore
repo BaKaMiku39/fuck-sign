@@ -1,0 +1,24 @@
+# ---- 凭据：绝对不要提交 ----
+cookies*.json
+accounts.json
+devices.json
+.env
+certs/
+*.pem
+*.key
+
+# ---- 运行时产物 ----
+scan_raw.log
+*.log
+gui_*.out
+gui_*.err
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# ---- 编辑器/系统 ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

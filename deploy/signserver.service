@@ -1,0 +1,23 @@
+[Unit]
+Description=QR sign web (scan_server)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# 建一个专用低权限用户，别用 root
+User=sign
+WorkingDirectory=/opt/qr-sign-kit
+Environment=PYTHONUNBUFFERED=1
+# 上游站点地址：改成你自己的
+Environment=SIGN_BASE=https://courses.example.edu.cn
+# 留空 = 所有 cookies*.json 都签
+Environment=SIGN_TARGET=
+ExecStart=/opt/qr-sign-kit/.venv/bin/python /opt/qr-sign-kit/server.py --port 8080 --plain
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

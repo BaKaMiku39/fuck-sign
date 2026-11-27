@@ -1,0 +1,23 @@
+qr-sign-kit
+Copyright (c) 2026 BaKaMiku
+Licensed under the QR-Sign-Kit Non-Commercial License v1.0 (see LICENSE).
+商用需另行取得书面授权。
+
+--------------------------------------------------------------------------------
+Third-party components bundled in this repository
+--------------------------------------------------------------------------------
+
+web/vendor/jsQR.js
+  jsQR — A pure javascript QR code reading library.
+  Source: https://github.com/cozmo/jsQR
+  License: Apache License 2.0
+  The file is bundled as-is (webpack UMD build) so the page works offline
+  without pulling from a CDN. Apache-2.0 requires this notice to be retained.
+
+--------------------------------------------------------------------------------
+Runtime dependencies (installed via pip, not bundled)
+--------------------------------------------------------------------------------
+
+requests        Apache-2.0
+pillow          HPND (Pillow License)
+zxing-cpp       Apache-2.0

@@ -1,0 +1,111 @@
+QR-Sign-Kit 非商业使用许可 v1.0
+QR-Sign-Kit Non-Commercial License v1.0
+版权所有 (c) 2026 BaKaMiku ｜ Copyright (c) 2026 BaKaMiku
+保留所有权利 ｜ All rights reserved.
+
+────────────────────────────────────────────────────────────────────────
+一、授权（中文为准）
+────────────────────────────────────────────────────────────────────────
+
+在遵守本许可全部条款的前提下，任何人都被免费授予以下权利：
+
+  1. 使用、复制、修改本软件及其源码；
+  2. 分发本软件的原版或修改版；
+  3. 将本软件用于个人学习、教学、学术研究、竞赛或其他非商业目的。
+
+上述授权**仅限非商业用途**。
+
+────────────────────────────────────────────────────────────────────────
+二、禁止商业使用
+────────────────────────────────────────────────────────────────────────
+
+未经著作权人事先书面许可，**不得将本软件或其衍生作品用于任何商业目的**，
+包括但不限于：
+
+  1. 销售、出租、许可、转让本软件，或对其收费；
+  2. 将本软件（全部或部分）集成、嵌入到任何商业产品、商业服务或商业平台中；
+  3. 以本软件为基础提供任何形式的有偿服务（含 SaaS、托管服务、代运营、
+     技术支持、培训、咨询等）；
+  4. 在营利性组织内部用于其生产经营活动；
+  5. 以本软件为卖点进行广告、引流、会员收费或任何直接/间接变现；
+  6. 将本软件用于任何以获取经济利益为目的的自动化操作。
+
+"商业目的"指任何以直接或间接获取金钱或其他经济利益为目的的使用行为，
+不论是否实际盈利。
+
+商业授权请另行联系著作权人。
+
+────────────────────────────────────────────────────────────────────────
+三、分发条件
+────────────────────────────────────────────────────────────────────────
+
+分发本软件或其修改版时，必须：
+
+  1. 保留本许可文件的完整原文；
+  2. 在显著位置标注原作者与项目来源；
+  3. 对修改内容作出说明；
+  4. 不得附加任何与本许可冲突的条款，不得改用其他许可；
+  5. 不得移除或规避本许可中的任何限制。
+
+────────────────────────────────────────────────────────────────────────
+四、其他限制
+────────────────────────────────────────────────────────────────────────
+
+  1. 不得将本软件用于违反所在地法律法规或所在机构规章制度的用途；
+  2. 不得移除源码中的版权、许可与来源声明；
+  3. 本许可不授予任何商标、商号、服务标记的使用权。
+
+────────────────────────────────────────────────────────────────────────
+五、免责声明
+────────────────────────────────────────────────────────────────────────
+
+本软件按"现状"提供，不附带任何明示或默示的担保，包括但不限于对适销性、
+特定用途适用性、无侵权及无错误的担保。
+
+在任何情况下，作者或著作权人均不对因使用本软件或无法使用本软件而产生的
+任何直接、间接、偶然、特殊、惩罚性或后果性损害承担责任，包括但不限于
+数据丢失、账号受限、学业或业务损失、利润损失或第三方索赔，即使已被告知
+此类损害的可能性。
+
+使用者自行承担使用本软件的全部风险与全部责任。
+
+────────────────────────────────────────────────────────────────────────
+六、终止
+────────────────────────────────────────────────────────────────────────
+
+违反本许可任何条款的，本许可授予的权利立即自动终止。终止后，使用者必须
+停止使用并销毁本软件的全部副本。著作权人保留追究法律责任的权利。
+
+────────────────────────────────────────────────────────────────────────
+七、效力与解释
+────────────────────────────────────────────────────────────────────────
+
+本许可的中文版本为正式版本；如提供其他语言的翻译，仅为方便阅读，
+以中文版本为准。本许可未明确授予的权利，均由著作权人保留。
+
+未经著作权人书面同意，本许可不得修改。
+
+────────────────────────────────────────────────────────────────────────
+English Summary (for reference only; the Chinese text governs)
+────────────────────────────────────────────────────────────────────────
+
+Permission is granted, free of charge, to use, copy, modify and distribute
+this software **for non-commercial purposes only**, provided that this
+license is retained in full, the original author is credited, modifications
+are documented, and no additional restrictions are added.
+
+**Commercial use is strictly prohibited** without prior written permission
+from the copyright holder, including selling, licensing, embedding into
+commercial products or services, offering paid services based on this
+software (including SaaS, hosting, support, training, consulting), internal
+productive use by for-profit organizations, advertising or monetization of
+any kind, and any automation performed for economic benefit.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED. IN NO EVENT SHALL THE AUTHOR OR COPYRIGHT HOLDER BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM, OUT OF OR IN CONNECTION WITH
+THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+Any violation terminates the rights granted here immediately.
+
+For commercial licensing, contact the copyright holder.

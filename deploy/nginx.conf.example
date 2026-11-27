@@ -1,0 +1,15 @@
+# /etc/nginx/snippets/qr-sign.conf
+# 挂到已有 443 server 块的 server_name 下：将本文件 include 进 server {}
+# 访问地址变成 https://你的域名/sign/
+location /sign/ {
+    proxy_pass http://127.0.0.1:8080/;
+    proxy_http_version 1.1;
+    proxy_set_header Host              $host;
+    proxy_set_header X-Real-IP         $remote_addr;
+    proxy_set_header X-Forwarded-For   $remote_addr;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_read_timeout 60s;
+
+    # 手机照片动辄 3~8MB，默认 1m 会 413
+    client_max_body_size 12m;
+}
