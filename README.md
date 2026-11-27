@@ -40,14 +40,35 @@ pip install -r requirements.txt
 
 ```bash
 export SIGN_BASE=https://courses.example.edu.cn      # 改成你的站点
-python accounts.py login 20260001 '你的密码'
+python accounts.py login 20260001 '你的密码'          # 只登录，不记密码
+# 或者：登录 + 把密码记进本机加密库（会话过期能自动重登）
+python accounts.py add 20260001 '你的密码'
 # → 生成 cookies_20260001.json
 python accounts.py whoami                            # 验证会话还有效
 ```
 
-密码不落盘：只有 cookie 写文件，记得把 `cookies*.json` 加进 `.gitignore`（仓库已默认忽略）。
+### 3. 记住密码、自动续期（可选）
 
-### 3. 起服务
+会话一般一两周就过期。把密码交给本机加密库后，过期能自己救回来：
+
+```bash
+python accounts.py list       # 谁还有效、谁失效
+python accounts.py refresh    # 失效的自动重新登录（--dry 只看不登）
+python accounts.py rm 20260001 # 从库里删掉
+```
+
+密码存在哪：
+
+| 平台 | 方式 |
+|---|---|
+| Windows | **DPAPI**（`CryptProtectData`），密钥由「当前用户 + 当前机器」派生，文件拷走或换用户都解不开 |
+| 其他 | `~/.config/qr-sign-kit/vault.dat`，文件权限 0600，启动时会明确打印"明文"警告 |
+
+- 文件位置可用 `SIGN_VAULT` 覆盖；`vault.dat` 已在 `.gitignore` 里。
+- 库里只有 `学号 → 加密密码`，**没有**明文密码、也没有 cookie。
+- 想更保守：不建凭据库，沿用 `login` + 定期手动重登即可，其余功能不受影响。
+
+**3'. 起服务**
 
 ```bash
 # 本机/局域网：自签 https（手机摄像头要求 secure context）

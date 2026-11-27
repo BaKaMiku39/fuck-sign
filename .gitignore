@@ -2,6 +2,7 @@
 cookies*.json
 accounts.json
 devices.json
+vault.dat
 .env
 certs/
 *.pem
