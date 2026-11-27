@@ -6,7 +6,7 @@ services:
     container_name: qr-sign
     restart: unless-stopped
     environment:
-      SIGN_BASE: https://courses.example.edu.cn
+      SIGN_BASE: https://api.example.com
       SIGN_TARGET: ""
     volumes:
       # 会话文件放宿主机，容器只读挂进来；不要提交到仓库

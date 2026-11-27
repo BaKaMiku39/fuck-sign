@@ -18,7 +18,7 @@ server.py —— 手机当扫码枪的 Web 服务（HTTP 服务端 + 静态页�
 
 环境变量：
     SIGN_BASE       上游站点根地址
-    SIGN_TARGET     只给这个学号签（页面标题会显示）
+    SIGN_TARGET     只给这个账号签（页面标题会显示）
     SIGN_COOKIES    指定会话文件
     SIGN_RAW_LOG    原始返回落盘路径（默认 scan_raw.log）
 
@@ -298,7 +298,7 @@ def main() -> int:
         if not (os.path.exists(CERT) and os.path.exists(KEY)):
             print(f"缺少证书 {CERT} / {KEY}，退回 http（手机摄像头会被浏览器拦）")
             print("一句话自签：openssl req -x509 -newkey rsa:2048 -nodes -days 3650 "
-                  "-keyout certs/key.pem -out certs/cert.pem -subj '/CN=sign.local'")
+                  "-keyout certs/key.pem -out certs/cert.pem -subj '/CN=local.test'")
         else:
             ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
             ctx.load_cert_chain(CERT, KEY)

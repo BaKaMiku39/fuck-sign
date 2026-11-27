@@ -1,25 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-accounts.py —— 账号/会话管理：登录一次，落一份 cookies_<学号>.json
+accounts.py —— 账号/会话管理：登录一次，落一份 cookies_<账号>.json
 
 上游站点用 CAS（Apereo）→ 身份提供方 broker → 业务系统的 session cookie。
-登录成功后把整包 cookie 存成 `cookies_<学号>.json`，后面所有请求都用它。
+登录成功后把整包 cookie 存成 `cookies_<账号>.json`，后面所有请求都用它。
 
 密码可以**记在本机加密库里**（vault.py，Windows 用 DPAPI 按"当前用户+机器"加密），
 这样会话过期后能自动重新登录，不用人守着。
 
 环境变量：
-    SIGN_BASE    上游站点根地址（默认 https://courses.example.edu.cn）
+    SIGN_BASE    上游站点根地址（默认 https://api.example.com）
     SIGN_LOGIN   登录入口（默认 SIGN_BASE + /login）
     SIGN_VAULT   凭据库路径（默认 %LOCALAPPDATA%\\qr-sign-kit\\vault.dat）
 
 用法：
-    python accounts.py login 学号 密码            # 登录 + 存 cookie（不记密码）
-    python accounts.py add 学号 密码 [称呼]       # 登录 + 存 cookie + 记密码（推荐）
+    python accounts.py login 账号 密码            # 登录 + 存 cookie（不记密码）
+    python accounts.py add 账号 密码 [称呼]       # 登录 + 存 cookie + 记密码（推荐）
     python accounts.py refresh [--dry] [--user X] # 逐个检查，失效的自动重登
     python accounts.py list                       # 凭据库 + 会话状态
-    python accounts.py rm 学号                    # 从凭据库删掉（cookie 保留）
+    python accounts.py rm 账号                    # 从凭据库删掉（cookie 保留）
     python accounts.py whoami                     # 只查会话
     python accounts.py courses                    # 列课程
 """
@@ -35,7 +35,7 @@ import time
 import requests
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-BASE = (os.environ.get("SIGN_BASE") or "https://courses.example.edu.cn").rstrip("/")
+BASE = (os.environ.get("SIGN_BASE") or "https://api.example.com").rstrip("/")
 LOGIN = (os.environ.get("SIGN_LOGIN") or (BASE + "/login")).rstrip("/")
 UA = ("Mozilla/5.0 (Linux; Android 10; Mi 8 Build/QKQ1.190828.002; wv) "
       "AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 "
@@ -48,7 +48,7 @@ def log(msg: str) -> None:
 
 def new_session() -> requests.Session:
     s = requests.Session()
-    # 校园域名常被系统代理打断，强制直连
+    # 内网域名常被系统代理打断，强制直连
     s.trust_env = False
     s.proxies = {"http": None, "https": None}
     s.headers.update({"User-Agent": UA, "Accept-Language": "zh-CN,zh;q=0.9",
@@ -176,7 +176,7 @@ def cmd_refresh(dry: bool = False, only: str | None = None) -> int:
     if only:
         rows = [r for r in rows if r["user_no"] == only] or [{"user_no": only, "name": ""}]
     if not rows:
-        print("凭据库是空的：先跑 python accounts.py add 学号 密码")
+        print("凭据库是空的：先跑 python accounts.py add 账号 密码")
         return 1
 
     print(f"凭据库: {vault._path()}\n加密: {vault.backend()}\n")
@@ -236,13 +236,13 @@ def main() -> int:
 
     if cmd == "login":
         if len(args) < 3:
-            print("用法: python accounts.py login 学号 密码")
+            print("用法: python accounts.py login 账号 密码")
             return 2
         return 0 if login(args[1], args[2]) else 1
 
     if cmd == "add":
         if len(args) < 3:
-            print("用法: python accounts.py add 学号 密码 [称呼]")
+            print("用法: python accounts.py add 账号 密码 [称呼]")
             return 2
         return cmd_add(args[1], args[2], args[3] if len(args) > 3 else "")
 
@@ -256,7 +256,7 @@ def main() -> int:
 
     if cmd == "rm":
         if len(args) < 2:
-            print("用法: python accounts.py rm 学号")
+            print("用法: python accounts.py rm 账号")
             return 2
         import vault
         return 0 if vault.delete(args[1]) else 1

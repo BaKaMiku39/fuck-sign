@@ -16,8 +16,8 @@ qr_api.py —— 上游签到接口客户端（手机端那套 HTTP 接口的最
 鉴权两条路都认：Cookie `session=...` 或请求头 `x-session-id`（同一个值）。
 
 环境变量：
-    SIGN_BASE      上游站点根地址，默认 https://courses.example.edu.cn
-    SIGN_TARGET    只给这个学号签（留空 = 不限）
+    SIGN_BASE      上游站点根地址，默认 https://api.example.com
+    SIGN_TARGET    只给这个账号签（留空 = 不限）
     SIGN_COOKIES   指定会话文件，默认取目录下 cookies*.json 全部
 """
 from __future__ import annotations
@@ -35,7 +35,7 @@ import uuid
 import requests
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-BASE = (os.environ.get("SIGN_BASE") or "https://courses.example.edu.cn").rstrip("/")
+BASE = (os.environ.get("SIGN_BASE") or "https://api.example.com").rstrip("/")
 TARGET = (os.environ.get("SIGN_TARGET") or "").strip()
 DEVICE_FILE = os.path.join(HERE, "devices.json")
 
@@ -50,18 +50,18 @@ OK_STATUS = {"on_call", "on_call_fine", "answered", "on_call_late", "success"}
 # 服务端 message / error_code → 人话
 MSG = {
     "rollcall_closed": "签到已结束",
-    "rollcall_already_closed": "点名已结束",
+    "rollcall_already_closed": "签到已结束",
     "qr_code_expired": "二维码已过期",
     "QR_code_expired": "签到二维码已过期",
     "invalid_create_time_hash": "码的时间戳签名无效（过期或伪造）",
     "invalid_qr_create_time": "码的生成时间无效",
     "no_request_data": "服务端没收到 data",
     "device_used": "该设备已签到，请更换设备重新扫描",
-    "deviceAlreadyInUse": "已有学生用该设备签到，请更换设备",
+    "deviceAlreadyInUse": "已有客户端用该设备签到，请更换设备",
     "unknown_student": "你不在本课名单里",
     "failed": "签到失败",
     "wrongNumberCode": "签到密码错误",
-    "rollcallFinished": "点名已结束",
+    "rollcallFinished": "签到已结束",
     "retry": "签到失败，请重试",
     "getPositionFailed": "获取位置信息失败",
     "getPositionFailedTimeout": "获取位置信息超时",
@@ -104,7 +104,7 @@ def device_profile(key: str) -> dict:
     """由账号键派生一组稳定的设备参数。
 
     `deviceId` 必须是合法 UUID 形态（服务端按它判"同一台手机不能签两个人"），
-    用 uuid5 从账号键推导：同一个学号永远是同一个值，重启/换机器都不漂移。
+    用 uuid5 从账号键推导：同一个账号永远是同一个值，重启/换机器都不漂移。
     """
     d = _load_devices()
     rec = d.get(key)
@@ -146,7 +146,7 @@ class TronClient:
         self.timeout = timeout
         self.tag = os.path.basename(cookie_file)
         self.s = requests.Session()
-        # 内网/校园域名常被系统代理打断，这里强制直连
+        # 内网/内网域名常被系统代理打断，这里强制直连
         self.s.trust_env = False
         self.s.proxies = {"http": None, "https": None}
         self._load_cookies()
@@ -209,7 +209,7 @@ class TronClient:
         return self.s.request(method, url, **kw)
 
     def set_account_key(self, key: str) -> None:
-        """拿到学号后再绑设备（同一学号跨 cookie 文件也认作同一台手机）。"""
+        """拿到账号后再绑设备（同一账号跨 cookie 文件也认作同一台手机）。"""
         if not key or key == self._account_key:
             return
         self._account_key = bind_device(self._account_key, key)
@@ -259,7 +259,7 @@ class TronClient:
             return []
 
     def get_qr_token(self, rid, cid) -> tuple[str | None, str]:
-        """向服务端要当前二维码载荷（教师/助教权限才有；学生通常 403）。"""
+        """向服务端要当前二维码载荷（教师/助教权限才有；客户端通常 403）。"""
         r = self.req("GET", f"/api/course/{cid}/rollcall/{rid}/qr_code")
         if r.status_code != 200:
             return None, f"取码接口 HTTP {r.status_code}"
@@ -425,7 +425,7 @@ def submit_payload(text: str, dry: bool = False, files: list[str] | None = None)
 
     targets = files or cookie_files()
     if not targets:
-        print("没有 cookies*.json —— 先跑 python accounts.py login 学号")
+        print("没有 cookies*.json —— 先跑 python accounts.py login 账号")
         return False
     if dry:
         print(f"干跑：{len(targets)} 个账号，不提交")

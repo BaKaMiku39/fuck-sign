@@ -10,7 +10,7 @@ User=sign
 WorkingDirectory=/opt/qr-sign-kit
 Environment=PYTHONUNBUFFERED=1
 # 上游站点地址：改成你自己的
-Environment=SIGN_BASE=https://courses.example.edu.cn
+Environment=SIGN_BASE=https://api.example.com
 # 留空 = 所有 cookies*.json 都签
 Environment=SIGN_TARGET=
 ExecStart=/opt/qr-sign-kit/.venv/bin/python /opt/qr-sign-kit/server.py --port 8080 --plain

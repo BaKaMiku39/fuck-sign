@@ -13,7 +13,7 @@ COPY web/ ./web/
 
 # 会话文件在运行时挂进来（绝不要打进镜像）
 VOLUME ["/app/data"]
-ENV SIGN_BASE=https://courses.example.edu.cn
+ENV SIGN_BASE=https://api.example.com
 
 EXPOSE 8080
 CMD ["python", "server.py", "--port", "8080", "--plain"]

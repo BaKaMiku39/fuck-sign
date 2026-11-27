@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-vault.py —— 把学号/密码加密存在本机，用于"会话过期自动重新登录"
+vault.py —— 把账号/密码加密存在本机，用于"会话过期自动重新登录"
 
 设计取舍：
   · 密码绝不能明文落盘。Windows 上用 DPAPI（CryptProtectData），密钥由操作系统
